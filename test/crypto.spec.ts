@@ -155,8 +155,18 @@ describe("crypto.ts", function () {
         expect(certificate).to.equal(expectedCert);
       });
 
+      it("should return certificate in PEM format for multiline Base64 certificate with trailing newline", function () {
+        const certificate = keyInfoToPem(TEST_CERT_MULTILINE + "\n", "CERTIFICATE");
+        expect(certificate).to.equal(expectedCert);
+      });
+
       it("should return certificate in PEM format for singleline Base64 certificate", function () {
         const certificate = keyInfoToPem(TEST_CERT_SINGLELINE, "CERTIFICATE");
+        expect(certificate).to.equal(expectedCert);
+      });
+
+      it("should return certificate in PEM format for singleline Base64 certificate with trailing newline", function () {
+        const certificate = keyInfoToPem(TEST_CERT_SINGLELINE + "\n", "CERTIFICATE");
         expect(certificate).to.equal(expectedCert);
       });
 
