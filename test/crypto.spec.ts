@@ -175,8 +175,18 @@ describe("crypto.ts", function () {
         expect(publicKey).to.equal(expectedPublicKey);
       });
 
+      it("should return public key in PEM format for multiline Base64 public key with trailing newline", function () {
+        const publicKey = keyInfoToPem(TEST_PUBLIC_KEY_MULTILINE + "\n", "PUBLIC KEY");
+        expect(publicKey).to.equal(expectedPublicKey);
+      });
+
       it("should return public key in PEM format for singleline Base64 public key", function () {
         const publicKey = keyInfoToPem(TEST_PUBLIC_KEY_SINGLELINE, "PUBLIC KEY");
+        expect(publicKey).to.equal(expectedPublicKey);
+      });
+
+      it("should return public key in PEM format for singleline Base64 public key with trailing newline", function () {
+        const publicKey = keyInfoToPem(TEST_PUBLIC_KEY_SINGLELINE + "\n", "PUBLIC KEY");
         expect(publicKey).to.equal(expectedPublicKey);
       });
 
