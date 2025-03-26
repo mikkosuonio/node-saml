@@ -94,9 +94,25 @@ describe("crypto.ts", function () {
         expect(certificate).to.equal(expectedCert);
       });
 
+      it("should return certificate in PEM format for multiline certificate with trailing newline", function () {
+        const certificate = keyInfoToPem(
+          `-----BEGIN CERTIFICATE-----\n${TEST_CERT_MULTILINE}\n-----END CERTIFICATE-----\n`,
+          "CERTIFICATE",
+        );
+        expect(certificate).to.equal(expectedCert);
+      });
+
       it("should return certificate in PEM format for singleline certificate", function () {
         const certificate = keyInfoToPem(
           `-----BEGIN CERTIFICATE-----\n${TEST_CERT_SINGLELINE}\n-----END CERTIFICATE-----`,
+          "CERTIFICATE",
+        );
+        expect(certificate).to.equal(expectedCert);
+      });
+
+      it("should return certificate in PEM format for singleline certificate with trailing newline", function () {
+        const certificate = keyInfoToPem(
+          `-----BEGIN CERTIFICATE-----\n${TEST_CERT_SINGLELINE}\n-----END CERTIFICATE-----\n`,
           "CERTIFICATE",
         );
         expect(certificate).to.equal(expectedCert);
@@ -110,9 +126,25 @@ describe("crypto.ts", function () {
         expect(publicKey).to.equal(expectedPublicKey);
       });
 
+      it("should return public key in PEM format for multiline pubic key with trailing newline", function () {
+        const publicKey = keyInfoToPem(
+          `-----BEGIN PUBLIC KEY-----\n${TEST_PUBLIC_KEY_MULTILINE}\n-----END PUBLIC KEY-----\n`,
+          "PUBLIC KEY",
+        );
+        expect(publicKey).to.equal(expectedPublicKey);
+      });
+
       it("should return public key in PEM format for singleline public key", function () {
         const publicKey = keyInfoToPem(
           `-----BEGIN PUBLIC KEY-----\n${TEST_PUBLIC_KEY_SINGLELINE}\n-----END PUBLIC KEY-----`,
+          "PUBLIC KEY",
+        );
+        expect(publicKey).to.equal(expectedPublicKey);
+      });
+
+      it("should return public key in PEM format for singleline public key with trailing newline", function () {
+        const publicKey = keyInfoToPem(
+          `-----BEGIN PUBLIC KEY-----\n${TEST_PUBLIC_KEY_SINGLELINE}\n-----END PUBLIC KEY-----\n`,
           "PUBLIC KEY",
         );
         expect(publicKey).to.equal(expectedPublicKey);
