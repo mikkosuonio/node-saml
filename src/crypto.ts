@@ -56,7 +56,7 @@ export const keyInfoToPem = (
   pemLabel: PemLabel,
   optionName = "keyInfo",
 ): string => {
-  const keyData = Buffer.isBuffer(keyInfo) ? keyInfo.toString("latin1") : keyInfo;
+  const keyData = bufferToString(keyInfo)?.trim();
   assertRequired(keyData, `${optionName} is not provided`);
 
   if (PEM_FORMAT_REGEX.test(keyData)) {
@@ -70,6 +70,10 @@ export const keyInfoToPem = (
 
   return normalizePemFile(pem);
 };
+
+const bufferToString = (keyInfo: string | Buffer) => {
+  return Buffer.isBuffer(keyInfo) ? keyInfo.toString("latin1") : keyInfo;
+}
 
 export const generateUniqueId = (): string => {
   return "_" + crypto.randomBytes(20).toString("hex");
